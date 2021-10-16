@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+
 inquirer.prompt([
     {
         type: 'input',
@@ -8,48 +9,67 @@ inquirer.prompt([
     },
     {
         type: 'input',
-        message: 'Where are you located?',
-        name: 'location',
+        message: 'Repo name?',
+        name: 'repoName',
     },
     {
         type: 'input',
-        message: 'Tell me about yourself?',
-        name: 'bio',
+        message: 'Describe your project?',
+        name: 'description',
+    },
+    {
+        type: 'input',
+        message: 'What are the installation instructions?',
+        name: 'installation',
+    },
+    {
+        type: 'input',
+        message: 'Usage Information?',
+        name: 'usage',
+    },
+    {
+        type: 'input',
+        message: 'Contribution Guidelines?',
+        name: 'contributing',
+    },
+    {
+        type: 'input',
+        message: 'Testing Instructions?',
+        name: 'testing',
+    },
+    {
+        type: 'list',
+        message: 'Choose a Licence',
+        name: 'license',
+        choices: ["MIT License", "BSD 2-Clause License"]
     },
     {
         type: 'input',
         message: 'Do you have LinkedIn profile you would like to share?',
-        name: 'linkedInProfile',
+        name: 'userGithub',
     },
     {
         type: 'input',
         message: 'Do you have Github profile you would like to share?',
-        name: 'githubProfile',
+        name: 'userEmail',
     },
-]).then (function (surveyResults){
-console.log(surveyResults)
-var html=`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title>Document</title>
-</head>
-<body>
-    <p>${surveyResults.username}</p>
-    <p>${surveyResults.location}</p>
-    <p>${surveyResults.bio}</p>
-    <p>${surveyResults.linkedInProfile}</p>
-    <p>${surveyResults.githubProfile}</p>
+]).then (function (readmeQuestions) {
+    console.log(readmeQuestions)
 
+    var readme=` 
+${readmeQuestions.username}
+${readmeQuestions.repoName}
+${readmeQuestions.description}
+${readmeQuestions.installation}
+${readmeQuestions.usage}
+${readmeQuestions.contributing} 
+${readmeQuestions.testing} 
+${readmeQuestions.license} 
+${readmeQuestions.userGithub} 
+${readmeQuestions.userEmail} 
+    `
 
-</body>
-</html>`
-fs.writeFile('index.html',html,function(err){
-if (err) {
-    console.log(err)
-};
-})
+    fs.writeFile('generatedREADME.md', readme,(err) => {
+        err ? console.log(err):console.log("Sucess");
+    })
 })
