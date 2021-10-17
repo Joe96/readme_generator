@@ -9,7 +9,7 @@ inquirer.prompt([
     },
     {
         type: 'input',
-        message: 'Repo name?',
+        message: 'What is the name of your Github repository?',
         name: 'repoName',
     },
     {
@@ -45,7 +45,7 @@ inquirer.prompt([
     },
     {
         type: 'input',
-        message: 'Do you have LinkedIn profile you would like to share?',
+        message: 'What is your Git36',
         name: 'userGithub',
     },
     {
@@ -56,17 +56,36 @@ inquirer.prompt([
 ]).then (function (readmeQuestions) {
     console.log(readmeQuestions)
 
-    var readme=` 
-${readmeQuestions.username}
-${readmeQuestions.repoName}
-${readmeQuestions.description}
-${readmeQuestions.installation}
-${readmeQuestions.usage}
-${readmeQuestions.contributing} 
-${readmeQuestions.testing} 
-${readmeQuestions.license} 
-${readmeQuestions.userGithub} 
-${readmeQuestions.userEmail} 
+    var readme=`# ${readmeQuestions.repoName} 
+
+    ## Description
+    ${readmeQuestions.description}
+    
+    ## Table of Contents 
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [License](#license)
+    - [Contribution](#contribution)
+    - [Test](#test)
+    - [Questions](#questions)
+    
+    ## Installation Instructions
+    ${readmeQuestions.install}
+    
+    ## Usage
+    ${readmeQuestions.usage}
+    
+    ## License
+    
+    ## Contributors
+    ${readmeQuestions.contributing} 
+    
+    ## Tests
+    ${readmeQuestions.tests}
+    
+    ## Questions
+    You can reach me via Github: ${readmeQuestions.github}
+    Or you can email me at: ${readmeQuestions.email}
     `
 
     fs.writeFile('generatedREADME.md', readme,(err) => {
