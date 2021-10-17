@@ -41,17 +41,17 @@ inquirer.prompt([
         type: 'list',
         message: 'Choose a Licence',
         name: 'license',
-        choices: ["MIT License", "BSD 2-Clause License"]
+        choices: ['Apache', 'MIT', 'Mozilla-Public', 'GNU-General-Public', 'Common-Development-and Distribution',"BSD 2-Clause License"]
     },
     {
         type: 'input',
-        message: 'What is your Git36',
-        name: 'userGithub',
+        message: 'Enter your Github username.',
+        name: 'github',
     },
     {
         type: 'input',
-        message: 'Do you have Github profile you would like to share?',
-        name: 'userEmail',
+        message: 'Enter your Email.',
+        name: 'email',
     },
 ]).then (function (readmeQuestions) {
     console.log(readmeQuestions)
@@ -76,6 +76,7 @@ inquirer.prompt([
     ${readmeQuestions.usage}
     
     ## License
+    [![license](https://img.shields.io/badge/license-${readmeQuestions.license}-blue)](https://shields.io)
     
     ## Contributors
     ${readmeQuestions.contributing} 
@@ -92,3 +93,7 @@ inquirer.prompt([
         err ? console.log(err):console.log("Sucess");
     })
 })
+
+function renderLicense () {
+
+}
